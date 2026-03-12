@@ -1,0 +1,9 @@
+{
+  "name": "πPi Dating - Connect in the Pi Ecosystem",
+  "description": "A premium dating and social networking application built specifically for the Pi Network community. Find matches, chat with AI-enhanced icebreakers, and use Pi for tipping or premium features.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation",
+    "microphone"
+  ]
+}

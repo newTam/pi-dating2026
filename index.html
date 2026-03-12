@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>πPi Dating & Trade</title>
+    <!-- Official Pi Network SDK -->
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="mesh-bg">
+    <div id="root"></div>
+    <script>
+        // Initialize Pi SDK for real use. 
+        // We wrap it in a function to handle potential loading delays or environment issues.
+        function initPi() {
+            const isPiBrowser = navigator.userAgent.includes("PiBrowser");
+            
+            if (window.Pi && isPiBrowser) {
+                try {
+                    window.Pi.init({ version: "2.0", sandbox: true });
+                    console.log("Pi SDK initialized in Pi Browser");
+                } catch (e) {
+                    console.error("Pi SDK init error:", e);
+                    setupMock();
+                }
+            } else {
+                console.log("Not in Pi Browser or SDK not loaded. Setting up Mock.");
+                setupMock();
+            }
+        }
+
+        function setupMock() {
+            window.Pi = {
+                init: (config) => console.log("Mock Pi Init", config),
+                authenticate: (scopes, onIncompletePaymentFound) => {
+                    console.log("Mock Authenticate called with scopes:", scopes);
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve({
+                                user: {
+                                    username: "Pioneer_Alex",
+                                    uid: "pioneer-12345",
+                                    roles: ["pioneer"]
+                                },
+                                accessToken: "mock-access-token"
+                            });
+                        }, 800);
+                    });
+                },
+                createPayment: (data, callbacks) => {
+                    console.log("Mock Payment created:", data);
+                    setTimeout(() => {
+                        callbacks.onReadyForServerApproval("mock-payment-id-54321");
+                    }, 500);
+                }
+            };
+        }
+
+        // Run initialization
+        if (document.readyState === 'complete') {
+            initPi();
+        } else {
+            window.addEventListener('load', initPi);
+        }
+    </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

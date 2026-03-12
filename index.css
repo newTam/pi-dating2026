@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#0f0511] text-white overflow-x-hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-[24px] border border-white/10;
+  }
+  
+  .gradient-btn {
+    @apply bg-gradient-to-r from-[#ff6262] to-[#9146ff];
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .mesh-bg {
+    background-color: #0f0511;
+    background-image: 
+      radial-gradient(circle at 0% 0%, rgba(107, 70, 193, 0.25) 0%, transparent 40%),
+      radial-gradient(circle at 100% 0%, rgba(255, 98, 161, 0.2) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(145, 70, 255, 0.1) 0%, transparent 60%),
+      radial-gradient(circle at 100% 100%, rgba(255, 98, 98, 0.15) 0%, transparent 40%);
+  }
+  
+  .swipe-card {
+    @apply transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] touch-none;
+  }
+  
+  .swipe-left {
+    transform: translateX(-150%) rotate(-20deg) !important;
+    opacity: 0 !important;
+  }
+  
+  .swipe-right {
+    transform: translateX(150%) rotate(20deg) !important;
+    opacity: 0 !important;
+  }
+}
